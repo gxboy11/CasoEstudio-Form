@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CasoEstudio_Form.Domain.InputModels
+namespace CasoEstudio_Form.Domain.InputModels.Usuarios
 {
     public class UsuarioExistente
     {
@@ -15,7 +16,7 @@ namespace CasoEstudio_Form.Domain.InputModels
 
         public string passwordUsuario { get; set; }
 
-        public static implicit operator UsuarioExistente(Domain.DTOs.Usuarios.Usuario existente)
+        public static implicit operator UsuarioExistente(DTOs.Usuarios.Usuario existente)
         {
             return new UsuarioExistente
             {

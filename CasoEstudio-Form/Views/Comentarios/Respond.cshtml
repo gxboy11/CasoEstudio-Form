@@ -1,0 +1,28 @@
+﻿@model CasoEstudio_Form.Domain.InputModels.Publicaciones.NuevaPublicacion
+@{
+    ViewData["Title"] = "Responder Comentario";
+}
+
+<div class="container">
+    <h1>Responder Comentario</h1>
+    <hr />
+
+    <!-- Muestra el comentario padre al que se está respondiendo -->
+    <div class="card my-3">
+        <div class="card-body">
+            <h5 class="card-title">@Model.idParent</h5>
+            <p class="card-text">@Model.TextoComentario</p>
+        </div>
+    </div>
+
+    <form asp-action="Respond" method="post">
+        <div class="form-group">
+            <label asp-for="TextoComentario">Tu Respuesta</label>
+            <textarea asp-for="TextoComentario" class="form-control"></textarea>
+            <input type="hidden" asp-for="idUsuario" value="@Context.Session.GetInt32("idUser")" />
+            <input type="hidden" asp-for="idParent" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Publicar Respuesta</button>
+    </form>
+</div>

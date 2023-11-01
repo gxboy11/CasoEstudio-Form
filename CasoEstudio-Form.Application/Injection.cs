@@ -20,6 +20,7 @@ namespace CasoEstudio_Form.Application
             services.AddValidatorsFromAssembly(assembly);
 
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IPublicacionService, PublicacionService>();
 
             return services;
         }

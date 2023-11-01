@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CasoEstudio_Form.Application.Contracts.Contexts;
 using CasoEstudio_Form.Domain.EntityModels.Usuarios;
+using CasoEstudio_Form.Domain.EntityModels.Publicaciones;
 using Microsoft.EntityFrameworkCore;
 
 namespace CasoEstudio_Form.Persistence.Contexts
@@ -18,6 +19,7 @@ namespace CasoEstudio_Form.Persistence.Contexts
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Publicaciones> Publicaciones { get; set; }
 
         public void Save()
         {

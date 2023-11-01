@@ -1,5 +1,6 @@
 ﻿using CasoEstudio_Form.Application.Contracts.Contexts;
 using CasoEstudio_Form.Application.Contracts.Repositories;
+using CasoEstudio_Form.Domain.EntityModels.Publicaciones;
 using CasoEstudio_Form.Domain.EntityModels.Usuarios;
 using CasoEstudio_Form.Persistence.Contexts;
 using CasoEstudio_Form.Persistence.Repositories;
@@ -21,6 +22,7 @@ namespace CasoEstudio_Form.Persistence
                 (options => options.GetService<ApplicationDbContext>());
 
             services.AddRepository<Usuario, IUsuarioRepository, UsuarioRepository>();
+            services.AddRepository<Publicaciones, IPublicacionRepository, PublicacionRepository>();
 
             return services;
         }

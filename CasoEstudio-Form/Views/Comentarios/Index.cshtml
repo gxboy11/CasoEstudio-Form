@@ -1,53 +1,36 @@
-﻿@page
-@using CasoEstudio_Form.Controllers;
-@model List<ComentarioModel> 
+﻿@model IEnumerable<CasoEstudio_Form.Domain.DTOs.Publicaciones.Publicaciones>
 @{
     ViewData["Title"] = "Comentarios";
 }
 
-<h1>Comentarios</h1>
+<div class="container">
+    <h1>Comentarios</h1>
+    <hr />
+    <a asp-action="Create" class="btn btn-primary">Crear Nuevo Comentario</a>
 
-<div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Buscar comentarios..." aria-label="Buscar comentarios..." aria-describedby="basic-addon2">
-    <div class="input-group-append">
-        <span class="input-group-text" id="basic-addon2">
-            <i class="fa fa-search"></i>
-        </span>
-    </div>
+    @foreach (var publicacion in Model.Where(c => c.IdParent == null))
+    {
+        <div class="card my-3">
+            <div class="card-body">
+                <h5 class="card-title">@publicacion.IdUsuario</h5>
+                <p class="card-text">@publicacion.TextComentario</p>
+                <p class="card-text text-muted">Publicado el @publicacion.FechaComentario.ToString("dd/MM/yyyy")</p>
+                <a asp-action="Edit" asp-route-id="@publicacion.IdComentario" class="btn btn-link">Editar</a>
+
+                <a asp-action="Respond" asp-route-idParent="@publicacion.IdComentario" class="btn btn-link">Responder</a>
+
+                <!-- Mostrar respuestas a este comentario -->
+                @foreach (var respuesta in Model.Where(r => r.IdParent == publicacion.IdComentario))
+                {
+                    <div class="card my-3">
+                        <div class="card-body">
+                            <h5 class="card-title">@respuesta.IdUsuario</h5>
+                            <p class="card-text">@respuesta.TextComentario</p>
+                            <p class="card-text text-muted">Publicado el @respuesta.FechaComentario.ToString("dd/MM/yyyy")</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
 </div>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Texto</th>
-            <th>Autor</th>
-            <th>Fecha Publicación</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (int i = 0; i < Model.Count; i++)
-        {
-            <tr>
-                <td>@Model[i].Id</td>
-                <td>@Model[i].Text</td>
-                <td>@Model[i].Author</td>
-                <td>@Model[i].DatePosted.ToString("yyyy-MM-dd HH:mm:ss")</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<h2>Agregar Comentario</h2>
-
-<form asp-action="Create">
-    <div class="form-group">
-        <label asp-for="Text">Texto</label>
-        <input asp-for="Text" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Author">Autor</label>
-        <input asp-for="Author" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">Agregar Comentario</button>
-</form>

@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CasoEstudio_Form.Domain.InputModels
+namespace CasoEstudio_Form.Domain.InputModels.Usuarios
 {
     public class NuevoUsuario
     {

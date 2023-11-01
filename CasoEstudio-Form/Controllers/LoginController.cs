@@ -1,8 +1,10 @@
 ﻿using CasoEstudio_Form.Application.Contracts;
-using CasoEstudio_Form.Domain.InputModels;
 using CasoEstudio_Form.Domain.ViewModels;
+using CasoEstudio_Form.Domain.InputModels.Usuarios;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using CasoEstudio_Form.Application.Services;
+using CasoEstudio_Form.Domain.DTOs.Usuarios;
 
 namespace CasoEstudio_Form.Controllers
 {
@@ -26,9 +28,12 @@ namespace CasoEstudio_Form.Controllers
         {
             if (ModelState.IsValid)
             {
+                int userId = _service.GetUserByCredentials(model.nombreUsuario, model.passwordUsuario);
 
                 if (_service.IsCredentialValid(model.nombreUsuario, model.passwordUsuario))
                 {
+                    HttpContext.Session.SetInt32("idUser", userId);
+                    HttpContext.Session.SetString("username", model.nombreUsuario);
                     return RedirectToAction("Index", "Home");
                 }
                 else

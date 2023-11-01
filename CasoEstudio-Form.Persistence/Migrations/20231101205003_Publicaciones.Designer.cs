@@ -4,6 +4,7 @@ using CasoEstudio_Form.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CasoEstudio_Form.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231101205003_Publicaciones")]
+    partial class Publicaciones
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +36,7 @@ namespace CasoEstudio_Form.Persistence.Migrations
                     b.Property<DateTime>("fechaComentario")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("idParent")
+                    b.Property<int>("idParent")
                         .HasColumnType("int");
 
                     b.Property<int>("idUsuario")
@@ -77,7 +80,9 @@ namespace CasoEstudio_Form.Persistence.Migrations
                 {
                     b.HasOne("CasoEstudio_Form.Domain.EntityModels.Publicaciones.Publicaciones", "Publicacion")
                         .WithMany()
-                        .HasForeignKey("idParent");
+                        .HasForeignKey("idParent")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CasoEstudio_Form.Domain.EntityModels.Usuarios.Usuario", "Usuario")
                         .WithMany()

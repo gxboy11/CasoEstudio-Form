@@ -7,17 +7,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CasoEstudio_Form.Domain.InputModels;
+using CasoEstudio_Form.Domain.InputModels.Usuarios;
+using Microsoft.EntityFrameworkCore;
+using CasoEstudio_Form.Application.Contracts.Contexts;
 
 namespace CasoEstudio_Form.Application.Services
 {
     public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository _repository;
+        private readonly IApplicationDbContext _context;
 
-        public UsuarioService(IUsuarioRepository _repository)
+        public UsuarioService(IUsuarioRepository _repository, IApplicationDbContext _context)
         {
             this._repository = _repository;
+            this._context = _context;
         }
 
         public Usuario Get(int id)
@@ -72,7 +76,16 @@ namespace CasoEstudio_Form.Application.Services
             return false;
         }
 
+        public int GetUserByCredentials(string username, string password)
+        {
+            var user = _context.Usuarios.SingleOrDefault(u => u.nombreUsuario == username && u.passwordUsuario == password);
 
+            if (user != null)
+            {
+                return user.idUsuario;
+            }
 
+            return -1;
+        }
     }
 }

@@ -1,0 +1,21 @@
+﻿@model CasoEstudio_Form.Domain.InputModels.Publicaciones.NuevaPublicacion
+@{
+    ViewData["Title"] = "Crear Comentario";
+}
+
+<div class="container">
+    <h1>Crear Comentario</h1>
+    <hr />
+
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label asp-for="TextoComentario">Texto del Comentario</label>
+            <textarea asp-for="TextoComentario" class="form-control"></textarea>
+
+            <p>@Context.Session.GetInt32("idUser")</p>
+        </div>
+        <input type="hidden" asp-for="idUsuario" value="@Context.Session.GetInt32("idUser")" />
+
+        <button type="submit" class="btn btn-primary">Publicar Comentario</button>
+    </form>
+</div>

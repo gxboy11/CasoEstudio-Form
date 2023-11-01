@@ -1,4 +1,5 @@
 ﻿using CasoEstudio_Form.Domain.EntityModels.Usuarios;
+using CasoEstudio_Form.Domain.EntityModels.Publicaciones;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace CasoEstudio_Form.Application.Contracts.Contexts
     {
 
         DbSet<Usuario> Usuarios { get; set; }
+        DbSet<Publicaciones> Publicaciones { get; set; }
 
         void Save();
 
