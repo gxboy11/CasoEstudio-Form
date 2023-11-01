@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CasoEstudio_Form.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231031072347_AppToDb")]
+    [Migration("20231101002115_AppToDb")]
     partial class AppToDb
     {
         /// <inheritdoc />

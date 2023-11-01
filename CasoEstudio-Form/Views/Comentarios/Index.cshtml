@@ -1,0 +1,53 @@
+﻿@page
+@using CasoEstudio_Form.Controllers;
+@model List<ComentarioModel> 
+@{
+    ViewData["Title"] = "Comentarios";
+}
+
+<h1>Comentarios</h1>
+
+<div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Buscar comentarios..." aria-label="Buscar comentarios..." aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">
+            <i class="fa fa-search"></i>
+        </span>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Texto</th>
+            <th>Autor</th>
+            <th>Fecha Publicación</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@Model[i].Id</td>
+                <td>@Model[i].Text</td>
+                <td>@Model[i].Author</td>
+                <td>@Model[i].DatePosted.ToString("yyyy-MM-dd HH:mm:ss")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Agregar Comentario</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Text">Texto</label>
+        <input asp-for="Text" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Author">Autor</label>
+        <input asp-for="Author" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Agregar Comentario</button>
+</form>
